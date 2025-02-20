@@ -15,6 +15,7 @@ const Login = () => {
     const location = useLocation();
 
     const from = location.state?.from?.pathname || '/';
+    console.log('in the location login page',location.state)
 
     useEffect(() => { // captcha character is 6;
         loadCaptchaEnginge(6);
@@ -32,14 +33,14 @@ const Login = () => {
                 console.log(user);
                 Swal.fire({
                     title: "User Login Successful.css",
-                    showClass: {
+                    showclassName: {
                       popup: `
                         animate__animated
                         animate__fadeInUp
                         animate__faster
                       `
                     },
-                    hideClass: {
+                    hideclassName: {
                       popup: `
                         animate__animated
                         animate__fadeOutDown
@@ -133,6 +134,7 @@ const Login = () => {
                         {/* Captcha */}
                         <div>
                             <label className="block font-medium"> <LoadCanvasTemplate /></label>
+                            
                             <input
                                 onBlur={handleValidateCaptcha}
                                 type="text"
@@ -144,8 +146,9 @@ const Login = () => {
                         </div>
 
                         {/* Login Button */}
+                        {/* TODO: apply disabled for re-captcha */}
                         <input
-                            disabled={disable}
+                            disabled={false}
                             type="submit" value='Login' className='btn btn-primary w-full' />
 
 

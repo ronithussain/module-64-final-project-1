@@ -10,7 +10,7 @@ const Cover = ({ img, title }) => {
         >
             <div>
                 <div
-                    class="hero h-[700px]"
+                    className="hero h-[700px]"
                    >
                     <div className="hero-overlay"></div>
                     <div className="hero-content text-neutral-content text-center">

@@ -31,14 +31,14 @@ const Register = () => {
                         reset();
                         Swal.fire({
                             title: "User updated successfully",
-                            showClass: {
+                            showclassName: {
                                 popup: `
                                         animate__animated
                                         animate__fadeInUp
                                         animate__faster
                                       `
                             },
-                            hideClass: {
+                            hideclassName: {
                                 popup: `
                                         animate__animated
                                         animate__fadeOutDown

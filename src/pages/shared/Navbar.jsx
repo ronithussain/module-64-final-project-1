@@ -1,32 +1,44 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
+import { FaShoppingCart } from 'react-icons/fa';
+import useCart from '../../hooks/useCart';
 
 const Navbar = () => {
-    const {user, signOutUser} = useContext(AuthContext);
+    const { user, signOutUser } = useContext(AuthContext);
+    const [cart] = useCart(); // useCart hooks theke aray akare distructure kora hoyeche tai sevabey use kora holo;
+
     const handleLogout = () => {
         signOutUser()
-        .then(result => {})
-        .catch(error => console.log(error.message))
+            .then(result => { })
+            .catch(error => console.log(error.message))
     }
 
     const navOptions = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/menu">Our Menu</Link></li>
-        <li><Link to="/order">Order Food</Link></li>
+        <li><Link to="/order/salad">Order Food</Link></li>
         <li><Link to="/secret">Secret</Link></li>
+        <li>
+            <Link to="/dashboard/cart">
+                <button className='btn'>
+                    <FaShoppingCart className='text-lg'/>
+                    <div className="badge bg-black badge-secondary">+ {cart.length}</div>
+                </button>
+            </Link>
+        </li>
 
         {
-            user? <>
-            <span className='text-xs'>{user?.displayName}</span>
-            <button 
-            onClick={handleLogout}
-            className='btn btn-ghost'>SignOut</button>
-            </> 
-            : 
-            <>
-            <li><Link to="/login">Login</Link></li>
+            user ? <>
+                {/* <span className='text-xs'>{user?.displayName}</span> */}
+                <button
+                    onClick={handleLogout}
+                    className='btn btn-ghost'>SignOut</button>
             </>
+                :
+                <>
+                    <li><Link to="/login">Login</Link></li>
+                </>
         }
 
 
@@ -42,7 +54,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                             {navOptions}
                         </ul>
                     </div>
@@ -50,7 +62,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                       {navOptions}
+                        {navOptions}
                     </ul>
                 </div>
                 <div className="navbar-end">

@@ -12,7 +12,6 @@ const useMenu = () => {
                 setMenu(data);
                 setLoading(false);
             })
-
             
         }, [])
         return [menu, loading]
