@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 
 
@@ -14,39 +15,52 @@ import Swal from 'sweetalert2';
 const Register = () => {
     const [showsPassword, setShowsPassword] = useState(false);
 
-    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { handleRegister, handleUpdateProfile } = useContext(AuthContext);
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
 
     const onSubmit = data => {
-        console.log(data);
+        // console.log(data);
+
         handleRegister(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
                 handleUpdateProfile(data.name, data.photoURL)
                     .then(result => {
-                        console.log('User profile updated successful!')
-                        reset();
-                        Swal.fire({
-                            title: "User updated successfully",
-                            showclassName: {
-                                popup: `
+                        // create user entry in the database start here
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email,
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added to the database')
+                                    reset();
+                                    Swal.fire({
+                                        title: "User updated successfully",
+                                        showclassName: {
+                                            popup: `
                                         animate__animated
                                         animate__fadeInUp
                                         animate__faster
                                       `
-                            },
-                            hideclassName: {
-                                popup: `
+                                        },
+                                        hideclassName: {
+                                            popup: `
                                         animate__animated
                                         animate__fadeOutDown
                                         animate__faster
                                       `
-                            }
-                        });
-                        navigate('/');
+                                        }
+                                    });
+                                    navigate('/');
+                                }
+                            })
+                        // create user entry in the database end here
                     })
                     .catch(error => {
                         console.log('User updated failed!!!', error.message)

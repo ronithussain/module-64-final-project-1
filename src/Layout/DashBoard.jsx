@@ -1,17 +1,66 @@
 import { NavLink, Outlet } from "react-router-dom";
-import SectionTitle from "../components/sectionTitle/SectionTitle";
-import { FaAd, FaCalendar, FaCocktail, FaHome, FaList, FaPaypal, FaShoppingCart } from "react-icons/fa";
+import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHome, FaList, FaPaypal, FaShoppingCart, FaUser, FaUtensils } from "react-icons/fa";
 import { FaShop } from "react-icons/fa6";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 
 const DashBoard = () => {
     const [cart] = useCart();
+
+    // TODO: get isAdmin value from the database
+    const isAdmin = useAdmin();
+
     return (
         <div className="flex">
             {/* dashboard side bar */}
             <div className="w-64 min-h-screen bg-orange-300">
                 <ul className="menu w-full space-y-4">
+                    {/* admin---------------------------------------------------------------------- */}
+                    {
+                        isAdmin ?
+                            <>
+                                <li>
+                                    <NavLink to="/dashboard/adminHome" className=" font-medium text-xl">
+                                        <FaHome className=" text-xl" />
+                                        Admin Home
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/addItems" className=" font-medium text-xl">
+                                        <FaUtensils className=" text-xl" />
+                                       Add Items
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/manageItems" className=" font-medium text-xl">
+                                        <FaList className=" text-xl" />
+                                        Manage Items
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/manageBookings" className=" font-medium text-xl">
+                                        <FaBook className=" text-xl" />
+                                        Manage Bookings
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/users" className=" font-medium text-xl">
+                                        <FaUser className=" text-xl" />
+                                        All Users
+                                    </NavLink>
+                                </li>
+                              
+                            </>
+                            :
+                            <>
+
+                            </>
+                    }
+
+
+                    {/* user------------------------------------------------------------------------ */}
+                    <div className="divider">or</div>
                     <li>
                         <NavLink to="/dashboard/userHome" className="text-white font-medium text-xl">
                             <FaHome className="text-white text-xl" />
@@ -48,11 +97,12 @@ const DashBoard = () => {
                             My Bookings
                         </NavLink>
                     </li>
-                    <div className="divider"></div> 
+                    {/* ---------------------shared nav links---------------------- */}
+                    <div className="divider"></div>
                     <li>
                         <NavLink to="/" className="text-white font-medium text-xl">
                             <FaHome className="text-white text-xl" />
-                             Home
+                            Home
                         </NavLink>
                     </li>
                     <li>
@@ -62,15 +112,15 @@ const DashBoard = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/" className="text-white font-medium text-xl">
+                        <NavLink to="/order/shop" className="text-white font-medium text-xl">
                             <FaShop className="text-white text-xl" />
-                             Shop
+                            Shop
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/" className="text-white font-medium text-xl">
-                            <FaCocktail className="text-white text-xl" />
-                             Contact
+                        <NavLink to="/order/contact" className="text-white font-medium text-xl">
+                            <FaEnvelope className="text-white text-xl" />
+                            Contact
                         </NavLink>
                     </li>
                 </ul>
@@ -78,7 +128,6 @@ const DashBoard = () => {
 
             {/* dashboard content */}
             <div className="flex-1 p-8">
-                <SectionTitle subHeading="My Cart" heading="wanna add more?"></SectionTitle>
                 <Outlet></Outlet>
             </div>
         </div>

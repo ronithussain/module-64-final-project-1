@@ -2,6 +2,7 @@ import { FaDollarSign, FaTrash } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import SectionTitle from "../../../components/sectionTitle/SectionTitle";
 
 
 const Cart = () => {
@@ -39,6 +40,7 @@ const Cart = () => {
 
     return (
         <div className="bg-base-300 px-6 py-6">
+            <SectionTitle subHeading="My Cart" heading="wanna add more?"></SectionTitle>
             <div className="flex justify-between items-center md:flex-wrap">
                 <h2 className="text-4xl md:text-3xl">Total Orders: {cart.length}</h2>
                 <h2 className="text-4xl md:text-3xl flex items-center">Total Price:<FaDollarSign /> {totalPrice}</h2>

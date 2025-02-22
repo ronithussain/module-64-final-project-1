@@ -1,23 +1,34 @@
-import { useContext } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 
 
 const SocialLogin = () => {
-    const { signInWithGoogle } = useContext(AuthContext);
+    const { signInWithGoogle } = useAuth();
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
 
     const handleGoogleLogin = () => {
         signInWithGoogle()
             .then(result => {
-                navigate('/');
-                // console.log(result.user)
+                console.log(result.user)
+                //------------------------------------
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName
+                }
+                axiosPublic.post('/users', userInfo)
+                .then(res => {
+                    console.log(res.data);
+                    navigate('/');
+                })
+                //------------------------------------
             })
             .catch(error => {
-                // console.log(error.message)
+                console.log(error.message)
             })
     }
     return (
@@ -28,7 +39,7 @@ const SocialLogin = () => {
                     onClick={handleGoogleLogin}
                     className="btn w-full flex items-center justify-center gap-2 px-4 py-2 rounded transition "
                 >
-                    Sign in with Google
+                     Sign in with Google
                 </button>
             </div>
         </>
