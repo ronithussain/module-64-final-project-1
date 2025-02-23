@@ -29,7 +29,7 @@ const DashBoard = () => {
                                 <li>
                                     <NavLink to="/dashboard/addItems" className=" font-medium text-xl">
                                         <FaUtensils className=" text-xl" />
-                                       Add Items
+                                        Add Items
                                     </NavLink>
                                 </li>
                                 <li>
@@ -50,53 +50,53 @@ const DashBoard = () => {
                                         All Users
                                     </NavLink>
                                 </li>
-                              
+
                             </>
                             :
                             <>
-
+                            {/* user----------------------------------------------------------------- */}
+                                <li>
+                                    <NavLink to="/dashboard/userHome" className="text-white font-medium text-xl">
+                                        <FaHome className="text-white text-xl" />
+                                        User Home
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/reservation" className="text-white font-medium text-xl">
+                                        <FaCalendar className="text-white text-xl" />
+                                        Reservation
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/cart" className="text-white font-medium text-xl">
+                                        <FaShoppingCart className="text-white text-xl" />
+                                        My Cart: ({cart.length})
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/paymentMethod" className="text-white font-medium text-xl">
+                                        <FaPaypal className="text-white text-xl" />
+                                        Payment Method
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/review" className="text-white font-medium text-xl">
+                                        <FaAd className="text-white text-xl" />
+                                        Add a Review
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/dashboard/bookings" className="text-white font-medium text-xl">
+                                        <FaList className="text-white text-xl" />
+                                        My Bookings
+                                    </NavLink>
+                                </li>
                             </>
                     }
 
 
-                    {/* user------------------------------------------------------------------------ */}
-                    <div className="divider">or</div>
-                    <li>
-                        <NavLink to="/dashboard/userHome" className="text-white font-medium text-xl">
-                            <FaHome className="text-white text-xl" />
-                            User Home
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/reservation" className="text-white font-medium text-xl">
-                            <FaCalendar className="text-white text-xl" />
-                            Reservation
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/cart" className="text-white font-medium text-xl">
-                            <FaShoppingCart className="text-white text-xl" />
-                            My Cart: ({cart.length})
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/paymentMethod" className="text-white font-medium text-xl">
-                            <FaPaypal className="text-white text-xl" />
-                            Payment Method
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/review" className="text-white font-medium text-xl">
-                            <FaAd className="text-white text-xl" />
-                            Add a Review
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/dashboard/bookings" className="text-white font-medium text-xl">
-                            <FaList className="text-white text-xl" />
-                            My Bookings
-                        </NavLink>
-                    </li>
+
+
                     {/* ---------------------shared nav links---------------------- */}
                     <div className="divider"></div>
                     <li>
